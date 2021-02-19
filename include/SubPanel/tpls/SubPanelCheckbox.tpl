@@ -5,7 +5,7 @@
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
  *
  * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2018 SalesAgility Ltd.
+ * Copyright (C) 2011 - 2020 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -38,29 +38,16 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 *}
-{include file="themes/SuiteP/tpls/_head.tpl"}
-<body onMouseOut="closeMenus();">
 
-{if $AUTHENTICATED}
-    <div id="ajaxHeader">
-        {include file="themes/SuiteP/tpls/_headerModuleList.tpl"}
-    </div>
-{/if}
-{literal}
-<input id='ajaxUI-history-field' type='hidden'>
-<script type='text/javascript'>
-    if (SUGAR.ajaxUI && !SUGAR.ajaxUI.hist_loaded) {
-        YAHOO.util.History.register('ajaxUILoc', "", SUGAR.ajaxUI.go);
-        {/literal}{if $smarty.request.module != "ModuleBuilder"}{* Module builder will init YUI history on its own *}
-        YAHOO.util.History.initialize("ajaxUI-history-field", "ajaxUI-history-iframe");
-        {/if}{literal}
-    }
-</script>
-{/literal}
-<!-- Start of page content -->
-{if $AUTHENTICATED}
-<div id="bootstrap-container"
-     class="{if $THEME_CONFIG.display_sidebar && $smarty.cookies.sidebartoggle|default:'' != 'collapsed'}col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2{/if} main bootstrap-container">
-    <div id="content" class="content">
-        <div id="pagecontent" class=".pagecontent">
-{/if}
+<ul id="selectLinkTop" class="clickMenu selectmenu">
+    <li class="sugar_action_button">
+        <ul class="subnav" style="display: none;">
+            <li><input class="checkbox massall button_toggle_select_all" type="checkbox" name="checkallContacts"></li>
+            <li><a class="button_select_this_page_top" name="selectpage">{$APP.LBL_LISTVIEW_OPTION_CURRENT}</a></li>
+            <li><a class="button_select_all_top" name="selectall">{$APP.LBL_LISTVIEW_OPTION_ENTIRE}‎</a></li>
+            <li><a class="button_deselect_top" name="deselect">{$APP.LBL_LISTVIEW_NONE}</a></li>
+        </ul>
+        <span class="suitepicon suitepicon-action-caret"></span>
+    </li>
+</ul>
+<input type='hidden' name='select_entire_list' id="select_entire_list" value=''>
