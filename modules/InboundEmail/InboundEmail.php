@@ -5473,19 +5473,6 @@ class InboundEmail extends SugarBean
             // only log if not POP3; pop3 iterates through ALL mail
             if ($this->protocol != 'pop3') {
                 $GLOBALS['log']->info('InboundEmail found a duplicate email: ' . $message_id);
-                //echo "This email has already been imported";
-            }
-
-            if (!empty($this->compoundMessageId)) {
-                // return email
-                $result = $this->db->query(
-                    'SELECT id from emails WHERE message_id ="' . $this->compoundMessageId . '"' .
-                    'AND mailbox_id = "' . $this->id . '"'
-                );
-                $row = $this->db->fetchRow($result);
-                if (!empty($row['id'])) {
-                    return $row['id'];
-                }
             }
 
             return false;
